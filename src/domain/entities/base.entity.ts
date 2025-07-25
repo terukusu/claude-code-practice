@@ -26,6 +26,9 @@ export abstract class BaseEntity<T> {
   }
 
   equals(other: BaseEntity<T>): boolean {
+    if (!other || this.constructor !== other.constructor) {
+      return false;
+    }
     return this._id === other._id;
   }
 }
