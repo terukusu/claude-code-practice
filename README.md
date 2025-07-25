@@ -277,12 +277,11 @@ classDiagram
         +URGENT()
     }
     
-    User ||--o{ Project : owns
-    Project ||--o{ Task : contains
-    User ||--o{ Task : assigned
-    User ||-- Email : has
-    Task ||-- TaskStatus : has
-    Task ||-- Priority : has
+    User --> Email
+    User --> Project
+    Project --> Task
+    Task --> TaskStatus
+    Task --> Priority
 ```
 
 ### システム動作フロー
