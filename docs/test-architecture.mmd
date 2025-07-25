@@ -1,0 +1,34 @@
+graph TD
+    subgraph "🧪 Test Pyramid"
+        E2E[E2E Tests<br/>API Integration]
+        Integration[Integration Tests<br/>Service + Repository]
+        Unit[Unit Tests<br/>Domain Logic]
+    end
+    
+    subgraph "📊 Coverage Areas"
+        Domain[Domain Layer<br/>96%+ Coverage]
+        Application[Application Layer<br/>100% Coverage]
+        Infrastructure[Infrastructure<br/>84%+ Coverage]
+        Presentation[Presentation<br/>100% Coverage]
+    end
+    
+    subgraph "🔧 Test Tools"
+        Jest[Jest Framework]
+        Mocks[Mock Repositories]
+        TestDB[In-Memory Test DB]
+    end
+    
+    E2E --> Application
+    Integration --> Infrastructure
+    Unit --> Domain
+    
+    Jest -.-> E2E
+    Jest -.-> Integration
+    Jest -.-> Unit
+    
+    Mocks -.-> Integration
+    TestDB -.-> E2E
+    
+    style Unit fill:#e8f5e8
+    style Integration fill:#fff3e0
+    style E2E fill:#e1f5fe

@@ -1,0 +1,67 @@
+classDiagram
+    class User {
+        +String id
+        +Email email
+        +String name
+        +String bio
+        +Boolean isActive
+        +Date createdAt
+        +Date updatedAt
+    }
+    
+    class Project {
+        +String id
+        +String name
+        +String description
+        +String ownerId
+        +Boolean isActive
+        +Date createdAt
+        +Date updatedAt
+        +addMember(userId, role)
+        +removeMember(userId)
+        +updateDetails(name, description)
+    }
+    
+    class Task {
+        +String id
+        +String title
+        +String description
+        +TaskStatus status
+        +Priority priority
+        +String projectId
+        +String assigneeId
+        +String createdBy
+        +Date dueDate
+        +assignTo(userId)
+        +changeStatus(status)
+        +changePriority(priority)
+    }
+    
+    class Email {
+        +String value
+        +validate()
+        +toString()
+    }
+    
+    class TaskStatus {
+        +TaskStatusEnum value
+        +TODO()
+        +IN_PROGRESS()
+        +REVIEW()
+        +DONE()
+        +canTransitionTo(status)
+    }
+    
+    class Priority {
+        +PriorityEnum value
+        +LOW()
+        +MEDIUM()
+        +HIGH()
+        +URGENT()
+    }
+    
+    User --> Email
+    User --> Project
+    Project --> Task
+    Task --> TaskStatus
+    Task --> Priority

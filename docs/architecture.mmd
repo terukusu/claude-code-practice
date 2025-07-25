@@ -1,0 +1,39 @@
+graph TB
+    subgraph "🌐 Presentation Layer"
+        Controller[REST Controllers]
+        DTO[Data Transfer Objects]
+    end
+    
+    subgraph "🚀 Application Layer"
+        Service[Application Services]
+        Command[Commands/CQRS]
+        Query[Queries]
+    end
+    
+    subgraph "💎 Domain Layer"
+        Aggregate[Aggregates]
+        Entity[Entities]
+        ValueObject[Value Objects]
+        Event[Domain Events]
+        RepoInterface[Repository Interfaces]
+    end
+    
+    subgraph "🔧 Infrastructure Layer"
+        RepoImpl[Repository Implementations]
+        Database[(Database)]
+        External[External Services]
+    end
+    
+    Controller --> Service
+    Service --> Aggregate
+    Service --> RepoInterface
+    RepoInterface -.-> RepoImpl
+    RepoImpl --> Database
+    Aggregate --> ValueObject
+    Aggregate --> Entity
+    Aggregate --> Event
+    
+    style Domain fill:#e1f5fe
+    style Application fill:#f3e5f5
+    style Infrastructure fill:#fff3e0
+    style Presentation fill:#e8f5e8

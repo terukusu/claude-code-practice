@@ -1,0 +1,38 @@
+flowchart LR
+    subgraph "📱 Frontend"
+        UI[User Interface]
+    end
+    
+    subgraph "🌐 API Layer"
+        REST[REST Endpoints]
+        Valid[Validation]
+    end
+    
+    subgraph "🚀 Business Logic"
+        AppService[Application Service]
+        DomainLogic[Domain Logic]
+    end
+    
+    subgraph "💾 Data Layer"
+        Repo[Repository]
+        ORM[Drizzle ORM]
+    end
+    
+    subgraph "🗄️ Storage"
+        SQLite[(SQLite Dev)]
+        PostgreSQL[(PostgreSQL Prod)]
+    end
+    
+    UI -->|HTTP Request| REST
+    REST --> Valid
+    Valid -->|DTO| AppService
+    AppService -->|Commands| DomainLogic
+    DomainLogic -->|Business Rules| DomainLogic
+    AppService -->|Interface| Repo
+    Repo -->|SQL| ORM
+    ORM --> SQLite
+    ORM --> PostgreSQL
+    
+    DomainLogic -->|Domain Events| AppService
+    AppService -->|Response| REST
+    REST -->|JSON| UI

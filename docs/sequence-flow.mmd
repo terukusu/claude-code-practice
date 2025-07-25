@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant Client as 🖥️ Client
+    participant Controller as 🎯 UsersController
+    participant Service as 🚀 UsersService
+    participant Repo as 📚 UserRepository
+    participant DB as 🗄️ Database
+    participant Domain as 💎 Domain Objects
+    
+    Note over Client,DB: ユーザー作成フロー
+    
+    Client->>Controller: POST /users<br/>{email, name, bio}
+    Controller->>Controller: バリデーション
+    Controller->>Service: create(userData)
+    
+    Service->>Domain: new Email(email)
+    Domain->>Domain: メール形式検証
+    Domain-->>Service: Email VO
+    
+    Service->>Repo: create(userData)
+    Repo->>DB: INSERT INTO users
+    DB-->>Repo: User Record
+    Repo-->>Service: User Entity
+    Service-->>Controller: User Entity
+    Controller-->>Client: 201 Created<br/>User JSON
+    
+    Note over Client,DB: ドメインイベント処理
+    
+    Service->>Domain: TaskCreated Event
+    Domain->>Domain: イベント処理
+    Domain-->>Service: 完了通知
