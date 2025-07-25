@@ -1,263 +1,263 @@
-# Modern NestJS Task Management System 🚀
+# モダン NestJS タスク管理システム 🚀
 
-A comprehensive task management system built with modern NestJS, implementing Domain-Driven Design (DDD) patterns and featuring a multi-database architecture with SQLite and PostgreSQL support.
+NestJS を使用した包括的なタスク管理システム。ドメイン駆動設計（DDD）パターンを実装し、SQLite と PostgreSQL をサポートするマルチデータベースアーキテクチャを特徴としています。
 
-## ✨ Features
+## ✨ 機能
 
-- 🏗️ **Domain-Driven Design (DDD)** - Clean architecture with aggregates, value objects, and domain events
-- 🗄️ **Multi-Database Support** - SQLite for development, PostgreSQL for production
-- 🔄 **Modern ORM** - Drizzle ORM with type-safety and migrations
-- 🧪 **Comprehensive Testing** - 81+ tests with unit, integration, and E2E coverage
-- 📊 **Real-time APIs** - RESTful endpoints with health monitoring
-- 🎯 **Type Safety** - Full TypeScript implementation
-- 🔧 **Modern Tooling** - ESLint, Prettier, Jest, and development scripts
+- 🏗️ **ドメイン駆動設計（DDD）** - アグリゲート、バリューオブジェクト、ドメインイベントを含むクリーンアーキテクチャ
+- 🗄️ **マルチデータベース対応** - 開発環境用 SQLite、本番環境用 PostgreSQL
+- 🔄 **モダン ORM** - 型安全性とマイグレーションを備えた Drizzle ORM
+- 🧪 **包括的テスト** - ユニット、統合、E2E テストを含む 89+ テスト
+- 📊 **リアルタイム API** - ヘルスモニタリング付き RESTful エンドポイント
+- 🎯 **型安全性** - 完全な TypeScript 実装
+- 🔧 **モダンツール** - ESLint、Prettier、Jest、開発スクリプト
 
-## 🚀 Quick Start
+## 🚀 クイックスタート
 
-### Prerequisites
+### 前提条件
 
 - Node.js 18+ 
-- npm or yarn
-- SQLite (included) or PostgreSQL (optional)
+- npm または yarn
+- SQLite（含まれています）または PostgreSQL（オプション）
 
-### Installation
+### インストール
 
 ```bash
-# Clone the repository
+# リポジトリをクローン
 git clone https://github.com/terukusu/claude-code-practice.git
 cd claude-code-practice
 
-# Install dependencies
+# 依存関係をインストール
 npm install
 
-# Set up environment variables
+# 環境変数を設定
 cp .env.example .env
 
-# Start development server
+# 開発サーバーを起動
 npm run start:dev
 ```
 
-The application will be available at `http://localhost:3000`
+アプリケーションは `http://localhost:3000` で利用できます。
 
-## 📖 API Documentation
+## 📖 API ドキュメント
 
-### Health Check Endpoints
+### ヘルスチェックエンドポイント
 
-- `GET /` - Hello world message
-- `GET /health` - System health check with uptime
-- `GET /api/hello` - JSON API status
+- `GET /` - Hello world メッセージ
+- `GET /health` - 稼働時間を含むシステムヘルスチェック
+- `GET /api/hello` - JSON API ステータス
 
-### User Management
+### ユーザー管理
 
-- `GET /users` - List all users
-- `POST /users` - Create new user
-- `GET /users/:id` - Get user by ID
-- `PATCH /users/:id` - Update user
-- `DELETE /users/:id` - Delete user
+- `GET /users` - 全ユーザーの一覧
+- `POST /users` - 新しいユーザーを作成
+- `GET /users/:id` - ID でユーザーを取得
+- `PATCH /users/:id` - ユーザーを更新
+- `DELETE /users/:id` - ユーザーを削除
 
-### Example API Usage
+### API 使用例
 
 ```bash
-# Create a new user
+# 新しいユーザーを作成
 curl -X POST http://localhost:3000/users \
   -H "Content-Type: application/json" \
-  -d '{"email": "user@example.com", "name": "John Doe", "bio": "Software Developer"}'
+  -d '{"email": "user@example.com", "name": "田中太郎", "bio": "ソフトウェア開発者"}'
 
-# Get all users
+# 全ユーザーを取得
 curl http://localhost:3000/users
 
-# Health check
+# ヘルスチェック
 curl http://localhost:3000/health
 ```
 
-## 🧪 Testing
+## 🧪 テスト
 
-This project includes comprehensive testing with 81+ test cases covering all layers.
+このプロジェクトには、全レイヤーをカバーする 89+ のテストケースを含む包括的なテストが含まれています。
 
-### Running Tests
+### テストの実行
 
 ```bash
-# Run all tests
+# 全テストを実行
 npm test
 
-# Run tests in watch mode
+# ウォッチモードでテストを実行
 npm run test:watch
 
-# Run E2E tests
+# E2E テストを実行
 npm run test:e2e
 
-# Generate coverage report
+# カバレッジレポートを生成
 npm run test:cov
 
-# Run specific test files
+# 特定のテストファイルを実行
 npm test -- src/domain/value-objects/email.value-object.spec.ts
 ```
 
-### Test Coverage
+### テストカバレッジ
 
-- **Domain Layer**: 96%+ coverage
-- **Value Objects**: 100% coverage
-- **Aggregates**: 96% coverage
-- **Controllers**: 100% coverage
+- **ドメイン層**: 96%+ カバレッジ
+- **バリューオブジェクト**: 100% カバレッジ
+- **アグリゲート**: 96% カバレッジ
+- **コントローラー**: 100% カバレッジ
 
-### Test Structure
+### テスト構造
 
 ```
 src/
 ├── domain/
-│   ├── value-objects/          # Value object unit tests
-│   ├── aggregates/             # Domain aggregate tests
-│   └── events/                 # Domain event tests
+│   ├── value-objects/          # バリューオブジェクトのユニットテスト
+│   ├── aggregates/             # ドメインアグリゲートテスト
+│   └── events/                 # ドメインイベントテスト
 ├── infrastructure/
-│   └── repositories/           # Repository integration tests
-└── app.controller.spec.ts      # Controller tests
+│   └── repositories/           # リポジトリ統合テスト
+└── app.controller.spec.ts      # コントローラーテスト
 
 test/
-└── app.e2e-spec.ts            # End-to-end API tests
+└── app.e2e-spec.ts            # エンドツーエンド API テスト
 ```
 
-## 🗄️ Database Configuration
+## 🗄️ データベース設定
 
-### SQLite (Default - Development)
+### SQLite（デフォルト - 開発環境）
 
-No additional setup required. Database file is created automatically at `./data/database.sqlite`.
+追加設定は不要です。データベースファイルは `./data/database.sqlite` に自動作成されます。
 
-### PostgreSQL (Production)
+### PostgreSQL（本番環境）
 
-1. Install PostgreSQL
-2. Create database: `createdb hello_nestjs`
-3. Update `.env`:
+1. PostgreSQL をインストール
+2. データベースを作成: `createdb hello_nestjs`
+3. `.env` を更新:
 
 ```env
 DATABASE_TYPE=postgresql
 DATABASE_URL=postgresql://username:password@localhost:5432/hello_nestjs
 ```
 
-### Database Commands
+### データベースコマンド
 
 ```bash
-# Generate migration files
+# マイグレーションファイルを生成
 npm run db:generate
 
-# Apply schema to database
+# スキーマをデータベースに適用
 npm run db:push
 
-# Open Drizzle Studio (Database GUI)
+# Drizzle Studio を開く（データベース GUI）
 npm run db:studio
 ```
 
-## 🏗️ Project Architecture
+## 🏗️ プロジェクトアーキテクチャ
 
-### Domain-Driven Design Structure
+### ドメイン駆動設計構造
 
 ```
 src/
-├── domain/                     # Domain Layer (Business Logic)
-│   ├── aggregates/            # Domain aggregates (Task, Project)
-│   ├── entities/              # Domain entities
-│   ├── value-objects/         # Value objects (Email, Priority, etc.)
-│   ├── events/                # Domain events
-│   └── repositories/          # Repository interfaces
-├── application/               # Application Layer
-│   ├── commands/              # Command handlers (CQRS)
-│   ├── queries/               # Query handlers
-│   └── services/              # Application services
-├── infrastructure/            # Infrastructure Layer
-│   ├── persistence/           # Database configuration
-│   └── repositories/          # Repository implementations
-└── presentation/              # Presentation Layer
-    ├── controllers/           # REST controllers
-    └── dto/                   # Data transfer objects
+├── domain/                     # ドメイン層（ビジネスロジック）
+│   ├── aggregates/            # ドメインアグリゲート（Task、Project）
+│   ├── entities/              # ドメインエンティティ
+│   ├── value-objects/         # バリューオブジェクト（Email、Priority など）
+│   ├── events/                # ドメインイベント
+│   └── repositories/          # リポジトリインターフェース
+├── application/               # アプリケーション層
+│   ├── commands/              # コマンドハンドラー（CQRS）
+│   ├── queries/               # クエリハンドラー
+│   └── services/              # アプリケーションサービス
+├── infrastructure/            # インフラストラクチャ層
+│   ├── persistence/           # データベース設定
+│   └── repositories/          # リポジトリ実装
+└── presentation/              # プレゼンテーション層
+    ├── controllers/           # REST コントローラー
+    └── dto/                   # データ転送オブジェクト
 ```
 
-### Key Components
+### 主要コンポーネント
 
-- **Value Objects**: Email, TaskStatus, Priority with built-in validation
-- **Aggregates**: Task and Project with business rules and domain events
-- **Repository Pattern**: Clean data access abstraction
-- **CQRS Ready**: Command and query separation
-- **Domain Events**: Event-driven architecture support
+- **バリューオブジェクト**: 組み込み検証を持つ Email、TaskStatus、Priority
+- **アグリゲート**: ビジネスルールとドメインイベントを持つ Task と Project
+- **リポジトリパターン**: クリーンなデータアクセス抽象化
+- **CQRS 対応**: コマンドとクエリの分離
+- **ドメインイベント**: イベント駆動アーキテクチャサポート
 
-## 🛠️ Development
+## 🛠️ 開発
 
-### Available Scripts
+### 利用可能なスクリプト
 
 ```bash
-# Development
-npm run start:dev              # Start with hot reload
-npm run start:debug            # Start with debugging
-npm run start:prod             # Production mode
+# 開発
+npm run start:dev              # ホットリロード付きで開始
+npm run start:debug            # デバッグ付きで開始
+npm run start:prod             # 本番モード
 
-# Building
-npm run build                  # Build for production
+# ビルド
+npm run build                  # 本番用ビルド
 
-# Code Quality
-npm run lint                   # Run ESLint with auto-fix
-npm run format                 # Format code with Prettier
+# コード品質
+npm run lint                   # 自動修正付き ESLint を実行
+npm run format                 # Prettier でコードをフォーマット
 
-# Database
-npm run db:generate            # Generate migrations
-npm run db:push                # Push schema changes
-npm run db:studio              # Open database GUI
+# データベース
+npm run db:generate            # マイグレーションを生成
+npm run db:push                # スキーマ変更をプッシュ
+npm run db:studio              # データベース GUI を開く
 ```
 
-### Environment Variables
+### 環境変数
 
-Copy `.env.example` to `.env` and configure:
+`.env.example` を `.env` にコピーして設定してください:
 
 ```env
-# Database Configuration
+# データベース設定
 DATABASE_URL=./data/database.sqlite
 DATABASE_TYPE=sqlite
 
-# Application
+# アプリケーション
 PORT=3000
 NODE_ENV=development
 ```
 
-## 📁 Project Structure
+## 📁 プロジェクト構造
 
 ```
 hello_nestjs/
 ├── src/
-│   ├── domain/                # Domain logic
-│   ├── application/           # Application services
-│   ├── infrastructure/        # Data access & external concerns
-│   ├── users/                 # User feature module
-│   ├── app.controller.ts      # Main application controller
-│   ├── app.module.ts          # Root module
-│   ├── app.service.ts         # Application service
-│   └── main.ts                # Application entry point
-├── test/                      # E2E tests
-├── drizzle.config.ts          # Database configuration
-├── nest-cli.json              # NestJS CLI configuration
-├── package.json               # Dependencies and scripts
-├── tsconfig.json              # TypeScript configuration
-├── .env.example               # Environment template
-├── CLAUDE.md                  # Development guidance
-└── README.md                  # This file
+│   ├── domain/                # ドメインロジック
+│   ├── application/           # アプリケーションサービス
+│   ├── infrastructure/        # データアクセス＆外部関心事
+│   ├── users/                 # ユーザー機能モジュール
+│   ├── app.controller.ts      # メインアプリケーションコントローラー
+│   ├── app.module.ts          # ルートモジュール
+│   ├── app.service.ts         # アプリケーションサービス
+│   └── main.ts                # アプリケーションエントリーポイント
+├── test/                      # E2E テスト
+├── drizzle.config.ts          # データベース設定
+├── nest-cli.json              # NestJS CLI 設定
+├── package.json               # 依存関係とスクリプト
+├── tsconfig.json              # TypeScript 設定
+├── .env.example               # 環境変数テンプレート
+├── CLAUDE.md                  # 開発ガイダンス
+└── README.md                  # このファイル
 ```
 
-## 🚀 Production Deployment
+## 🚀 本番デプロイ
 
-### Build for Production
+### 本番用ビルド
 
 ```bash
-# Build the application
+# アプリケーションをビルド
 npm run build
 
-# Start production server
+# 本番サーバーを開始
 npm run start:prod
 ```
 
-### Environment Setup
+### 環境設定
 
-1. Set `NODE_ENV=production`
-2. Configure PostgreSQL database
-3. Set up proper environment variables
-4. Configure process manager (PM2, Docker, etc.)
+1. `NODE_ENV=production` を設定
+2. PostgreSQL データベースを設定
+3. 適切な環境変数を設定
+4. プロセスマネージャーを設定（PM2、Docker など）
 
-### Docker Support (Optional)
+### Docker サポート（オプション）
 
 ```dockerfile
 FROM node:18-alpine
@@ -269,37 +269,37 @@ EXPOSE 3000
 CMD ["npm", "run", "start:prod"]
 ```
 
-## 📚 Learning Resources
+## 📚 学習リソース
 
-This project demonstrates:
+このプロジェクトでは以下を実演しています:
 
-- **Domain-Driven Design** patterns in TypeScript
-- **Clean Architecture** principles
-- **SOLID** design principles
-- **Test-Driven Development** practices
-- **Modern NestJS** development patterns
-- **Type-safe ORM** usage with Drizzle
+- TypeScript での**ドメイン駆動設計**パターン
+- **クリーンアーキテクチャ**の原則
+- **SOLID** 設計原則
+- **テスト駆動開発**の実践
+- **モダン NestJS** 開発パターン
+- Drizzle での**型安全 ORM** 使用法
 
-## 🤝 Contributing
+## 🤝 コントリビューション
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Run tests (`npm test`)
-4. Commit your changes (`git commit -m 'Add amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
+1. リポジトリをフォーク
+2. 機能ブランチを作成（`git checkout -b feature/amazing-feature`）
+3. テストを実行（`npm test`）
+4. 変更をコミット（`git commit -m 'すごい機能を追加'`）
+5. ブランチにプッシュ（`git push origin feature/amazing-feature`）
+6. プルリクエストを開く
 
-## 📝 License
+## 📝 ライセンス
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+このプロジェクトは MIT ライセンスの下でライセンスされています - 詳細は [LICENSE](LICENSE) ファイルを参照してください。
 
-## 🙏 Acknowledgments
+## 🙏 謝辞
 
-- Built with [NestJS](https://nestjs.com/)
-- Database powered by [Drizzle ORM](https://orm.drizzle.team/)
-- Testing with [Jest](https://jestjs.io/)
-- Code quality with [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/)
+- [NestJS](https://nestjs.com/) で構築
+- [Drizzle ORM](https://orm.drizzle.team/) でデータベースを強化
+- [Jest](https://jestjs.io/) でテスト
+- [ESLint](https://eslint.org/) と [Prettier](https://prettier.io/) でコード品質を確保
 
 ---
 
-**🔥 Happy Coding!** Built with ❤️ using modern TypeScript and NestJS patterns.
+**🔥 ハッピーコーディング！** モダンな TypeScript と NestJS パターンで ❤️ を込めて構築。
